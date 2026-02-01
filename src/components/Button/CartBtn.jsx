@@ -1,0 +1,28 @@
+"use client";
+
+import { usePathname, useRouter } from "next/navigation";
+import { FaCartPlus } from "react-icons/fa";
+
+const CartBtn = ({ product }) => {
+  const isLogin = false;
+  const router = useRouter();
+  const path = usePathname();
+
+  const add2Cart = () => {
+    if (isLogin) alert(product._id);
+    else {
+      router.push(`/login?callbackUrl=${path}`);
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={add2Cart} className="btn btn-primary w-full ">
+        <FaCartPlus />
+        Add to Cart
+      </button>
+    </div>
+  );
+};
+
+export default CartBtn;
