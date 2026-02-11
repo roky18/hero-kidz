@@ -1,40 +1,39 @@
 import { getSingleProduct } from "@/actions/server/product";
-import CartBtn from "@/components/Button/CartBtn";
+import CartButton from "@/components/buttons/CartButton";
+
 import Image from "next/image";
 import React from "react";
+import { FaCartPlus, FaStar } from "react-icons/fa";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
-
-  const product = await getSingleProduct(id);
-
-  if (!product) {
-    return {
-      title: "Product Not Found | Hero Kids",
-      description: "Sorry, product not found",
-    };
-  }
+  const product = await getSingleProduct(id); // DB / API fetch
 
   return {
-    title: `${product.title} | Hero Kids`,
-    description: product.description.slice(0, 150),
+    title: product.title,
+    description:
+      product.description.slice(0, 160) ||
+      "Educational toy designed to help kids learn through play.",
+
     openGraph: {
-      title: `${product.title} | Hero Kids`,
-      description: product.description.slice(0, 150),
+      title: product.title,
+      description:
+        "Fun and educational learning toy for kids. Safe, colorful, and engaging.",
       images: [
         {
-          url: product.image, // product image link
+          url: product.image || "https://i.ibb.co.com/Ld7J2ZYq/image.png",
           width: 1200,
           height: 630,
           alt: product.title,
         },
       ],
     },
+
     twitter: {
       card: "summary_large_image",
-      title: `${product.title} | Hero Kids`,
-      description: product.description.slice(0, 150),
-      images: [product.image],
+      title: product.title,
+      description: "Fun and educational learning toy for kids.",
+      images: [product.image || "https://i.ibb.co.com/Ld7J2ZYq/image.png"],
     },
   };
 }
@@ -42,7 +41,6 @@ export async function generateMetadata({ params }) {
 const ProductDetails = async ({ params }) => {
   const { id } = await params;
   const product = await getSingleProduct(id);
-
   console.log(product);
 
   const {
@@ -58,12 +56,12 @@ const ProductDetails = async ({ params }) => {
     qna,
   } = product;
 
-  const discountPrice = price - (price * discount) / 100;
+  const discountedPrice = price - (price * discount) / 100;
 
   return (
     <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-10">
       {/* Image */}
-      <div className="rounded-xl overflow-hidden">
+      <div className="rounded-xl overflow-hidden ">
         <Image
           width={600}
           height={420}
@@ -73,55 +71,68 @@ const ProductDetails = async ({ params }) => {
         />
       </div>
 
-      {/* Details */}
-      <div className="space-y-6 flex flex-col justify-center">
-        {/* Title */}
-        <h1 className="text-3xl font-bold">{title}</h1>
+      {/* Info */}
+      <div>
+        <h1 className="text-3xl font-bold mb-3">{title}</h1>
+
+        {/* Rating */}
+        <div className="flex items-center gap-2 mb-4">
+          <div className="flex text-yellow-400">
+            {Array.from({ length: 5 }, (_, i) => (
+              <FaStar
+                key={i}
+                className={i < Math.round(ratings) ? "" : "opacity-30"}
+              />
+            ))}
+          </div>
+          <span className="text-sm text-gray-600">
+            {ratings} ({reviews} reviews) • {sold} sold
+          </span>
+        </div>
 
         {/* Price */}
-        <div className="flex items-center gap-4">
-          <span className="text-2xl font-bold text-green-600">
-            ৳{discountPrice.toFixed(2)}
+        <div className="mb-4">
+          <span className="text-2xl font-bold text-primary">
+            ৳{discountedPrice}
           </span>
           {discount > 0 && (
-            <span className="text-md text-gray-500 line-through">৳{price}</span>
+            <span className="line-through text-gray-400 ml-3">৳{price}</span>
           )}
         </div>
 
-        {/* Ratings & Stats */}
-        <div className="text-sm text-gray-700 flex gap-4">
-          <span>⭐ {ratings}</span>
-          <span>Reviews: {reviews}</span>
-          <span>Sold: {sold}</span>
-        </div>
-        {/* Add to Cart */}
-        <CartBtn product={product}></CartBtn>
+        {/* Actions */}
+        <CartButton product={product}></CartButton>
       </div>
-      <div className="col-span-full mt-10 spacey-2">
+      <div className="col-span-full">
         {/* Description */}
-        <p className="text-gray-700">{description}</p>
+        <div className="mt-8 space-y-4 text-gray-700 leading-relaxed">
+          {description?.split("\n\n").map((para, idx) => (
+            <p key={idx}>{para}</p>
+          ))}
+        </div>
 
-        {/* Info List */}
-        {info && info.length > 0 && (
-          <ul className="list-disc list-inside space-y-1 text-gray-700">
-            {info.map((item, idx) => (
-              <li key={idx}>{item}</li>
+        {/* Key Features */}
+        <div className="mt-6">
+          <h3 className="font-semibold mb-2">Key Features</h3>
+          <ul className="list-disc list-inside space-y-1">
+            {info?.map((item, i) => (
+              <li key={i}>{item}</li>
             ))}
           </ul>
-        )}
+        </div>
 
-        {/* Q&A Section */}
-        {qna && qna.length > 0 && (
-          <div className="mt-8 space-y-4">
-            <h2 className="text-2xl font-semibold">Q & A</h2>
-            {qna.map((qa, idx) => (
-              <div key={idx} className="border p-4 rounded-lg bg-gray-50">
-                <p className="font-medium">Q: {qa.question}</p>
-                <p className="text-gray-600">A: {qa.answer}</p>
+        {/* Q&A */}
+        <div className="mt-8">
+          <h3 className="font-semibold mb-3">Q & A</h3>
+          <div className="space-y-3">
+            {qna?.map((item, i) => (
+              <div key={i} className="border rounded-lg p-3">
+                <p className="font-medium">{item.question}</p>
+                <p className="text-sm text-gray-600 mt-1">{item.answer}</p>
               </div>
             ))}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

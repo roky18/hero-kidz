@@ -1,56 +1,117 @@
-import React from "react";
-import Link from "next/link";
-import { FaArrowRight } from "react-icons/fa";
+/* eslint-disable @next/next/no-img-element */
+import Blog_2 from "@/components/Blog_2/page";
+import Image from "next/image";
 
-const Blog = () => {
-  const blogs = [
-    {
-      title: "শিশুদের শেখার খেলনা কেন গুরুত্বপূর্ণ?",
-      date: "January 25, 2026",
-      excerpt:
-        "খেলনা শুধু মজা নয় — এটি শিশুদের cognitive, motor এবং social skills উন্নত করতে সাহায্য করে। আজ আমরা জানবো কোন ধরনের খেলনাগুলো সবচেয়ে উপকারী!",
-      slug: "importance-of-educational-toys",
-    },
-    {
-      title: "কিভাবে উপযোগী খেলনা বাছাই করবো?",
-      date: "January 20, 2026",
-      excerpt:
-        "শিশুদের বয়স, শিখার ধরণ ও নিরাপত্তা দেখে যখন খেলনা বাছাই করবে — তখন কিছু specific criteria মনে রাখা উচিত।",
-      slug: "how-to-choose-learning-toys",
-    },
-    {
-      title: "Play‑Based Learning এর উপকারিতা",
-      date: "January 15, 2026",
-      excerpt:
-        "Play‑based learning শিশুদের মধ্যে curiosity ও problem‑solving skill বাড়ায়। চলবে বলি কীভাবে play‑based activity শেখা সহজ করে!",
-      slug: "benefits-of-play-based-learning",
-    },
-  ];
-
+export default function BlogPage() {
   return (
-    <div className="max-w-5xl min-h-screen mx-auto px-6 py-10 space-y-8">
-      <h1 className="text-4xl font-bold text-center">Our Blog</h1>
+    <main className="max-w-5xl mx-auto px-4 py-10">
+      {/* Hero */}
+      <section className="text-center mb-12">
+        <span className="badge badge-primary mb-4">Parenting • Learning</span>
+        <h1 className="text-4xl font-bold leading-tight mt-3">
+          Why Learning Toys Are Important for Early Childhood
+        </h1>
+        <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
+          Play is not just fun — it’s the foundation of learning, creativity,
+          and problem-solving for children.
+        </p>
+      </section>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {blogs.map((post, i) => (
-          <div
-            key={i}
-            className="border rounded-lg shadow hover:shadow-lg transition p-6"
-          >
-            <h2 className="text-2xl font-semibold mb-2">{post.title}</h2>
-            <p className="text-sm text-gray-500 mb-4">{post.date}</p>
-            <p className="text-gray-700 mb-4">{post.excerpt}</p>
-            <Link
-              href={`/blog`}
-              className="text-blue-600 font-medium flex items-center gap-2"
-            >
-              Read More <FaArrowRight />
-            </Link>
-          </div>
-        ))}
+      {/* Featured Image */}
+      <section className="mb-10">
+        <Image
+          src="https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8"
+          alt="Kids learning toys"
+          width={1200}
+          height={420}
+          unoptimized
+          className="w-full h-[420px] object-cover rounded-2xl shadow"
+        />
+      </section>
+
+      {/* Blog Content */}
+      <article className="prose prose-lg max-w-none">
+        <p>
+          Childhood is the most important phase of human development. During
+          these early years, children learn faster than at any other time in
+          life. One of the most effective ways to support this learning process
+          is through <strong>educational toys</strong>.
+        </p>
+
+        <h2>Learning Through Play</h2>
+        <p>
+          Learning toys help children understand numbers, shapes, colors, and
+          basic logic without pressure. When kids play, they naturally explore,
+          experiment, and solve problems. This kind of learning stays with them
+          much longer than traditional memorization.
+        </p>
+
+        <blockquote>
+          “Play is the highest form of research.” — Albert Einstein
+        </blockquote>
+
+        <h2>Boosting Cognitive Development</h2>
+        <p>
+          Toys like number boards, puzzles, and building blocks strengthen
+          memory, focus, and reasoning skills. Children begin to recognize
+          patterns, make decisions, and think independently.
+        </p>
+
+        <ul>
+          <li>Improves logical thinking</li>
+          <li>Builds early math skills</li>
+          <li>Enhances problem-solving ability</li>
+        </ul>
+
+        <h2>Encouraging Confidence & Creativity</h2>
+        <p>
+          When children successfully complete a task or solve a puzzle, it
+          boosts their confidence. Creative toys also allow kids to imagine,
+          design, and express themselves freely — an essential life skill.
+        </p>
+
+        <h2>Safe & Meaningful Play</h2>
+        <p>
+          Modern educational toys are designed with child safety in mind. Using
+          non-toxic materials and age-appropriate designs ensures that kids can
+          learn safely at home or school.
+        </p>
+
+        <p>
+          Investing in learning toys is not just buying a product — it’s
+          investing in your child’s future.
+        </p>
+      </article>
+
+      <div>
+        <Blog_2></Blog_2>
       </div>
-    </div>
-  );
-};
 
-export default Blog;
+      {/* Author Box */}
+      <section className="mt-16 flex items-center gap-4 p-6 bg-base-200 rounded-2xl">
+        <img
+          src="https://i.pravatar.cc/100?img=12"
+          className="w-16 h-16 rounded-full"
+          alt="Author"
+        />
+        <div>
+          <h4 className="font-semibold">ToyLearn Editorial Team</h4>
+          <p className="text-sm text-gray-600">
+            Writing about child development, learning psychology, and play-based
+            education.
+          </p>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="mt-16 text-center">
+        <h3 className="text-2xl font-bold mb-4">
+          Explore Learning Toys for Your Child
+        </h3>
+        <button className="btn btn-primary btn-wide">
+          Browse Educational Toys
+        </button>
+      </section>
+    </main>
+  );
+}

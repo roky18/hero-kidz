@@ -1,14 +1,15 @@
 import React from "react";
 import Logo from "./Logo";
-import NavLink from "../Button/NavLink";
 import Link from "next/link";
-import { IoCartOutline } from "react-icons/io5";
+import NavLink from "../buttons/NavLink";
+import { FiShoppingCart } from "react-icons/fi";
+import AuthButtons from "../buttons/AuthButtons";
 
 const Navbar = () => {
   const nav = (
     <>
       <li>
-        <NavLink href={"/"}>Home</NavLink>
+        <Link href={"/"}>Home</Link>
       </li>
       <li>
         <NavLink href={"/products"}>Products</NavLink>
@@ -57,12 +58,9 @@ const Navbar = () => {
         </div>
         <div className="navbar-end space-x-4">
           <Link href={"/cart"} className="btn btn-primary">
-            <IoCartOutline />
+            <FiShoppingCart></FiShoppingCart>
           </Link>
-          <Link href={"/login"}>
-            {" "}
-            <button className="btn btn-primary btn-outline">Login</button>{" "}
-          </Link>
+          <AuthButtons></AuthButtons>
         </div>
       </div>
     </div>
