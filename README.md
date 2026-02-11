@@ -1,18 +1,26 @@
+# Live Link - https://hero-kids-one.vercel.app/
+
 # Hero Kidzz - Project Assets
+
 <img src="public/assets/hero.png">
 
 ## Overview
 
 Hero Kidzz is a small, single-vendor e-commerce web application designed for selling children's products. This repository contains all project assets including images, icons, and media files.
 
-## Run the Code 
+## Run the Code
+
 ### CLONE
+
 ```bash
  git clone https://github.com/ferdouszihad/Hero-Kidzz-part-1.git
 
 ```
+
 ### ENV
+
 set .env in root folder with following credentials
+
 ```bash
 MONGODB_URI=MONGODB_URI=
 DBNAME=
@@ -22,19 +30,20 @@ GOOGLE_CLIENT_SECRET=
 ```
 
 ### Install
+
 ```bash
 npm install
 ```
 
-### Run 
+### Run
+
 ```bash
 npm run dev
 ```
 
 ## DATA
+
 <a href="src/data/toys.json">HERE is the JSON DATA</a>
-
-
 
 ## Colors
 
@@ -71,4 +80,5 @@ Follow project guidelines when adding new assets.
 ## License
 
 All assets are proprietary to Hero Kidzz.
+
 # Hero-Kidz-assets

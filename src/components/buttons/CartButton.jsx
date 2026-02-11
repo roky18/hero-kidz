@@ -1,10 +1,11 @@
 "use client";
-import { handleCart } from "@/actions/server/cart";
+
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaCartPlus } from "react-icons/fa";
+import { handleCart } from "src/actions/server/cart";
 import Swal from "sweetalert2";
 
 const CartButton = ({ product }) => {

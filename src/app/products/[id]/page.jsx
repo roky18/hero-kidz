@@ -2,6 +2,7 @@ import { getSingleProduct } from "@/actions/server/product";
 import CartButton from "@/components/buttons/CartButton";
 
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaCartPlus, FaStar } from "react-icons/fa";
 
@@ -131,6 +132,11 @@ const ProductDetails = async ({ params }) => {
                 <p className="text-sm text-gray-600 mt-1">{item.answer}</p>
               </div>
             ))}
+          </div>
+          <div className="my-10 flex justify-center">
+            <Link href="/" className="btn btn-primary btn-dash">
+              Back to Home
+            </Link>
           </div>
         </div>
       </div>

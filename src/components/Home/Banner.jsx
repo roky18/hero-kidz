@@ -1,7 +1,8 @@
-import { fontBangla } from "@/app/layout";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { fontBangla } from "src/app/layout";
 
 const Banner = () => {
   return (
